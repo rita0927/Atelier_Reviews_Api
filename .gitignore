@@ -22,7 +22,6 @@ config.js
 package-lock.json
 coverage/
 test-review.js
-package.json
 client/dist/client_src_components_Review_Review_jsx.bundle.js
 client/dist/client_src_components_Related_Related_jsx.bundle.js
 client/dist/client_src_components_QA_QA_jsx.bundle.js
