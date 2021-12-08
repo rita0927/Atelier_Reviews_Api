@@ -1,0 +1,23 @@
+{
+  "name": "sdc-project",
+  "version": "1.0.0",
+  "description": "Build backend service for Atelier",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp31-sdc-stop-sign/sdc-project.git"
+  },
+  "author": "Team stop-sign: Yu Zhang & Yitong Liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp31-sdc-stop-sign/sdc-project/issues"
+  },
+  "homepage": "https://github.com/rpp31-sdc-stop-sign/sdc-project#readme",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
