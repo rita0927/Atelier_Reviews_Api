@@ -1,52 +1,37 @@
-# Prerequisites
-*.d
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# Other files and folders
+.settings/
 
 # Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+*.swf
+*.air
+*.ipa
+*.apk
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
+node_modules/
+client/dist/bundle.js
+config.js
+package-lock.json
+coverage/
+test-review.js
+package.json
+client/dist/client_src_components_Review_Review_jsx.bundle.js
+client/dist/client_src_components_Related_Related_jsx.bundle.js
+client/dist/client_src_components_QA_QA_jsx.bundle.js
+client/dist/client_src_components_Overview_Overview_jsx.bundle.js
+client/dist/vendors-node_modules_react-router-dom_index_js.bundle.js
+client/dist/client_src_star_jsx.bundle.js
+client/src/.DS_Store
+.env
+.DS_Store
+FEC.pem
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+
