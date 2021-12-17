@@ -22,10 +22,10 @@ mongoose.connect(DB)
 
 app.get('/reviews', async (req, res) => {
   const { page, count, product_id } = req.query
-  const review = await getReviews(page, count, product_id)
-  // console.log(review)
+  const reviews = await getReviews(page, count, product_id)
+  // console.log(reviews)
   try {
-    res.status(200).send(review);
+    res.status(200).send(reviews);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);

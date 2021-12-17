@@ -34,7 +34,7 @@ const getMeta = async (productId) => {
   ]).exec()
     .then(res => {
       res.forEach(rating => {
-        meta.ratings[rating._id] = rating.count
+        meta.ratings[rating._id] = rating.count || 0
       })
       // console.log('ratings:', meta.ratings)
     })
@@ -55,8 +55,10 @@ const getMeta = async (productId) => {
     }
   ]).exec()
     .then(res => {
-      meta.recommended.false = res[0].count
-      meta.recommended.true = res[1].count
+      if (res.length) {
+        meta.recommended.false = res[0].count
+        meta.recommended.true = res[1].count
+      }
       // console.log('recommended:', meta.recommended)
     })
 
@@ -79,7 +81,7 @@ const getMeta = async (productId) => {
         'id': 1,
         'product_id': 1,
         'name': 1,
-        //characteristics is an array of strings. Need to convert to int and calculate the average
+        //characteristics is an array of strings. Need to parse and calculate the average
         'characteristics': '$characteristics.value'
       }
     }
@@ -90,7 +92,7 @@ const getMeta = async (productId) => {
           'id': char.id,
           'value': char.characteristics.reduce((sum, cur) => {
             return sum + Number(cur)
-          }, 0) / char.characteristics.length
+          }, 0) / char.characteristics.length || 0
         }
       })
       // console.log('ratings:', meta.characteritics)
