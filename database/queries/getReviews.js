@@ -1,15 +1,17 @@
-const {
-  Review,
-  ReviewPhoto,
-  Characteristic,
-  CharacteristicReview
-} = require('../index');
+const { Review } = require('../index');
 
-const getReviews = (productId) => {
+const getReviews = async (page = 1, count = 5, productId) => {
 
-  console.log('Calling getReviews')
-  console.log(productId)
-  return Review.aggregate([
+  // console.log(productId)
+
+  const reviews = {
+    product: productId,
+    page: page,
+    count: count,
+    results: []
+  }
+
+  await Review.aggregate([
     {
       $match: { product_id: productId }
     },
@@ -32,7 +34,27 @@ const getReviews = (productId) => {
     }
   ])
     .exec()
-    .then(res => res)
+    .then(res => {
+      res.forEach(review => {
+        reviews.results.push(
+          {
+            "review_id": review.id,
+            "rating": review.rating,
+            "summary": review.summary,
+            "recommend": review.recommend,
+            "response": review.response,
+            "body": review.body,
+            "date": new Date(parseInt(review.date)).toISOString(),
+            "reviewer_name": review.reviewer_name,
+            "helpfulness": review.helpfulness,
+            "photos": review.photos
+          }
+        )
+      })
+    })
+
+
+  return reviews
 
 }
 

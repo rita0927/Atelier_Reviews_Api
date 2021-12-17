@@ -20,15 +20,9 @@ mongoose.connect(DB)
   })
 
 
-// app.get('/', (req, res) => {
-//   res.send('Hello');
-// });
-
-
 app.get('/reviews', async (req, res) => {
-  const { product_id } = req.query
-  // console.log('product_id:', product_id)
-  const review = await getReviews(product_id)
+  const { page, count, product_id } = req.query
+  const review = await getReviews(page, count, product_id)
   // console.log(review)
   try {
     res.status(200).send(review);
@@ -38,6 +32,18 @@ app.get('/reviews', async (req, res) => {
   }
 })
 
+
+app.get('/reviews/meta', async (req, res) => {
+  const { product_id } = req.query
+  const meta = await getMeta(product_id)
+  // console.log(meta)
+  try {
+    res.status(200).send(meta);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+})
 
 
 
