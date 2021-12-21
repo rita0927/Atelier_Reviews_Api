@@ -52,3 +52,11 @@ module.exports = {
   Characteristic,
   CharacteristicReview
 }
+
+
+
+//database ETL - mongodb import tool, command line code
+// mongoimport --type csv --db reviews --collection characteristics --headerline --drop --file ../data/characteristics.csv
+// mongoimport --type csv --db reviews --collection characteristicreviews --headerline --drop --file ../data/characteristic_reviews.csv
+// mongoimport --type csv --db reviews --collection reviewphotos --headerline --drop --file ../data/reviews_photos.csv
+// mongoimport --type csv --db reviews --collection reviews --headerline --drop --file ../data/reviews.csv
