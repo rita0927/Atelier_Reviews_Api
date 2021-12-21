@@ -53,7 +53,8 @@ app.post('/reviews', async (req, res) => {
   try {
 
     // console.log('New Request:', req.body)
-    await postReview(req.body)
+    const newReview = await postReview(req.body)
+    // console.log(newReview)
     res.status(201).send('CREATED');
   } catch (err) {
     console.error(err);
@@ -61,9 +62,11 @@ app.post('/reviews', async (req, res) => {
   }
 })
 
-app.put('/reviews:review_id/helpful', async (req, res) => {
+app.put('/reviews/:review_id/helpful', async (req, res) => {
+
   try {
     const { review_id } = req.params
+    // console.log('Review_id:', review_id)
     await markHelpful(review_id)
     res.status(204).send('UPDATED');
   } catch (err) {
@@ -73,7 +76,8 @@ app.put('/reviews:review_id/helpful', async (req, res) => {
 
 })
 
-app.put('/reviews:review_id/report', async (req, res) => {
+app.put('/reviews/:review_id/report', async (req, res) => {
+  // app.put('/reviews/:review_id', async (req, res) => {
   try {
     const { review_id } = req.params
     await reportReview(review_id)

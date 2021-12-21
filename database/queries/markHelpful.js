@@ -1,17 +1,20 @@
 const { Review } = require('../index');
 
-const markHelpful = async (review_id) => {
+const markHelpful = async (reviewId) => {
 
   try {
+    const review = await Review.findOne({ review_id: reviewId })
+    const helpfulCount = Number(review.helpfulness) + 1
+    // console.log(review.helpfulness)
+    await Review.updateOne({ review_id: reviewId }, { helpfulness: helpfulCount })
 
-    const review = await Review.findOne({ id: review_id })
-    const update = { helpfulness: Number(review.helpfulness) + 1 }
-    await review.updateOne(update)
 
   } catch (err) {
     console.log(err)
   }
 
 }
+
+
 
 module.exports = markHelpful

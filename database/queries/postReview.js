@@ -4,7 +4,7 @@ const postReview = async (newReview) => {
   await Review.count({})
     .exec()
     .then(reviewCount => {
-      // console.log(reviewCount)
+      // console.log('New Review:', newReview)
       Review.create({
         id: Number(reviewCount) + 1,
         product_id: newReview.product_id,
@@ -48,12 +48,11 @@ const postReview = async (newReview) => {
                 value: val
               })
             })
-
           }
         })
     })
 
-  return newReview
+  // return newReview
 }
 module.exports = postReview
 
