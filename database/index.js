@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 
 const reviewSchema = new Schema({
-  id: Number,
-  product_id: Number,
+  id: { type: Number, index: true },
+  product_id: { type: Number, index: true },
   rating: Number,
   date: String,
   summary: String,
@@ -19,21 +19,21 @@ const reviewSchema = new Schema({
 });
 
 const characteristicSchema = new Schema({
-  id: Number,
-  product_id: Number,
+  id: { type: Number, index: true },
+  product_id: { type: Number, index: true },
   name: String
 });
 
 const characteristicReviewsSchema = new Schema({
-  id: Number,
-  characteristic_id: Number,
-  review_id: Number,
+  id: { type: Number, index: true },
+  characteristic_id: { type: Number, index: true },
+  review_id: { type: Number, index: true },
   value: Number
 });
 
 const reviewPhotoSchema = new Schema({
   id: Number,
-  review_id: Number,
+  review_id: { type: Number, index: true },
   url: String
 });
 
@@ -56,7 +56,7 @@ module.exports = {
 
 
 //database ETL - mongodb import tool, command line code
-// mongoimport --type csv --db reviews --collection characteristics --headerline --drop --file ../data/characteristics.csv
-// mongoimport --type csv --db reviews --collection characteristicreviews --headerline --drop --file ../data/characteristic_reviews.csv
-// mongoimport --type csv --db reviews --collection reviewphotos --headerline --drop --file ../data/reviews_photos.csv
-// mongoimport --type csv --db reviews --collection reviews --headerline --drop --file ../data/reviews.csv
+// mongoimport --type csv --db Atelier_reviews --collection characteristics --headerline --drop --file ../data/characteristics.csv
+// mongoimport --type csv --db  Atelier_reviews --collection characteristicreviews --headerline --drop --file ../data/characteristic_reviews.csv
+// mongoimport --type csv --db  Atelier_reviews --collection reviewphotos --headerline --drop --file ../data/reviews_photos.csv
+// mongoimport --type csv --db  Atelier_reviews --collection reviews --headerline --drop --file ../data/reviews.csv

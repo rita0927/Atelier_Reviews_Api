@@ -1,9 +1,9 @@
 const { Review } = require('../index');
 
-const reportReview = async (reviewId) => {
+const reportReview = async (review_id) => {
 
   try {
-    await Review.findOneAndUpdate({ review_id: reviewId }, { reported: 'true' })
+    await Review.findOneAndUpdate({ id: review_id }, { reported: 'true' })
   } catch (err) {
     console.log(err)
   }

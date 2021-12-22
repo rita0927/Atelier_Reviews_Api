@@ -1,12 +1,20 @@
 const { Review, CharacteristicReview, ReviewPhoto } = require('../index');
 
-const postReview = async (newReview) => {
-  await Review.count({})
-    .exec()
-    .then(reviewCount => {
-      // console.log('New Review:', newReview)
+
+const postReview = (newReview) => {
+
+
+  const countReview = Review.count()
+  const countPhoto = ReviewPhoto.count()
+  const countCharacteristics = CharacteristicReview.count()
+
+  Promise.all([countReview, countPhoto, countCharacteristics])
+    .then(counts => {
+
+      const [reviewCount, photoCount, characteristicsCount] = counts
+      console.log('COUNT:', reviewCount, photoCount, characteristicsCount)
       Review.create({
-        id: Number(reviewCount) + 1,
+        id: reviewCount + 1,
         product_id: newReview.product_id,
         rating: newReview.rating,
         date: new Date().getTime(),
@@ -19,40 +27,34 @@ const postReview = async (newReview) => {
         response: '',
         helpfulness: 0
       })
-    })
-    .then(() => {
-      ReviewPhoto.count({})
-        .exec()
-        .then(photoCount => {
-          if (newReview.photos) {
-            newReview.photos.forEach((photo, index) => {
-              ReviewPhoto.create({
-                id: Number(photoCount) + index + 1,
-                review_id: Number(reviewCount) + 1,
-                url: photo
-              })
-            })
-          }
+
+      if (newReview.photos) {
+        newReview.photos.forEach((photo, index) => {
+          ReviewPhoto.create({
+            id: photoCount + index + 1,
+            review_id: reviewCount + 1,
+            url: photo
+          })
         })
-    })
-    .then(() => {
-      CharacteristicReview.count({})
-        .exec()
-        .then(characteristicsCount => {
-          if (newReview.characteristics) {
-            newReview.characteristics.forEach((val, index) => {
-              CharacteristicReview.create({
-                id: Number(characteristicsCount) + index + 1,
-                characeristic_id: index + 1,
-                review_id: Number(reviewCount) + 1,
-                value: val
-              })
-            })
-          }
+      }
+
+      if (newReview.characteristics) {
+        newReview.characteristics.forEach((val, index) => {
+          CharacteristicReview.create({
+            id: characteristicsCount + index + 1,
+            characeristic_id: index + 1,
+            review_id: reviewCount + 1,
+            value: val
+          })
         })
+      }
+
+
+    })
+    .catch(err => {
+      console.log(err)
     })
 
-  // return newReview
 }
-module.exports = postReview
 
+module.exports = postReview

@@ -11,7 +11,6 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-
 const DB = process.env.DATABASE_LOCAL
 
 mongoose.connect(DB)
@@ -51,8 +50,7 @@ app.get('/reviews/meta', async (req, res) => {
 app.post('/reviews', async (req, res) => {
 
   try {
-
-    // console.log('New Request:', req.body)
+    console.log('New Request:', req.body)
     const newReview = await postReview(req.body)
     // console.log(newReview)
     res.status(201).send('CREATED');
@@ -61,9 +59,9 @@ app.post('/reviews', async (req, res) => {
     res.sendStatus(500);
   }
 })
-
+//
 app.put('/reviews/:review_id/helpful', async (req, res) => {
-
+  // app.put('/reviews/:review_id', async (req, res) => {
   try {
     const { review_id } = req.params
     // console.log('Review_id:', review_id)
@@ -75,7 +73,7 @@ app.put('/reviews/:review_id/helpful', async (req, res) => {
   }
 
 })
-
+//
 app.put('/reviews/:review_id/report', async (req, res) => {
   // app.put('/reviews/:review_id', async (req, res) => {
   try {
