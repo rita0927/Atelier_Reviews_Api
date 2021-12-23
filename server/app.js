@@ -26,7 +26,7 @@ app.get('/reviews', async (req, res) => {
   const { page, count, product_id } = req.query
   try {
     const reviews = await getReviews(page, count, product_id)
-    // console.log(reviews)
+    // console.log('Review:', reviews)
     res.status(200).send(reviews);
   } catch (err) {
     console.error(err);
@@ -39,7 +39,7 @@ app.get('/reviews/meta', async (req, res) => {
   const { product_id } = req.query
   try {
     const meta = await getMeta(product_id)
-    // console.log(meta)
+    // console.log('Meta:', meta)
     res.status(200).send(meta);
   } catch (err) {
     console.error(err);
@@ -50,9 +50,8 @@ app.get('/reviews/meta', async (req, res) => {
 app.post('/reviews', async (req, res) => {
 
   try {
-    console.log('New Request:', req.body)
+    // console.log('New Request:', req.body)
     const newReview = await postReview(req.body)
-    // console.log(newReview)
     res.status(201).send('CREATED');
   } catch (err) {
     console.error(err);

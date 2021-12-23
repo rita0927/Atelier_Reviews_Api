@@ -12,7 +12,7 @@ const postReview = (newReview) => {
     .then(counts => {
 
       const [reviewCount, photoCount, characteristicsCount] = counts
-      console.log('COUNT:', reviewCount, photoCount, characteristicsCount)
+      // console.log('COUNT:', reviewCount, photoCount, characteristicsCount)
       Review.create({
         id: reviewCount + 1,
         product_id: newReview.product_id,
@@ -39,12 +39,13 @@ const postReview = (newReview) => {
       }
 
       if (newReview.characteristics) {
-        newReview.characteristics.forEach((val, index) => {
+        const characteristicValues = Object.entries(newReview.characteristics)
+        characteristicValues.forEach((characteristic, index) => {
           CharacteristicReview.create({
             id: characteristicsCount + index + 1,
-            characeristic_id: index + 1,
+            characeristic_id: Number(characteristic[0]),
             review_id: reviewCount + 1,
-            value: val
+            value: characteristic[1]
           })
         })
       }
