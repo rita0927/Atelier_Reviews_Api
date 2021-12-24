@@ -4,29 +4,15 @@ const _globals = require('@jest/globals')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const DB = process.env.DATABASE_MOCK
-// console.log(DB)
-// const DB = 'mongodb://localhost:27017/Mock_reviews'
+
 mongoose.connect(DB)
 
 const { Review, ReviewPhoto, Characteristic, CharacteristicReview } = require('../database/schema');
-
-// const app = require('../server/app')
-// const getMeta = require('../database/queries/getMeta.js')
-// const getReviews = require('../database/queries/getReviews.js')
-// const postReview = require('../database/queries/postReview.js')
-// const markHelpful = require('../database/queries/markHelpful.js')
-// const reportReview = require('../database/queries/reportReview.js')
 
 
 afterAll(async () => {
   await mongoose.connection.close()
 })
-
-
-
-// getReviews = jest.fn()
-// jest.mock('../database/queries/getReviews.js')
-// jest.mock("../database/queries/postReview.js");
 
 
 const mockReview = {
@@ -79,7 +65,6 @@ describe('GET reviews', () => {
     })
 
   })
-
 
 })
 
