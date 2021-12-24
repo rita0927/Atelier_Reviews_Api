@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,9 @@
   "homepage": "https://github.com/rpp31-sdc-stop-sign/sdc-project#readme",
   "devDependencies": {
     "express": "^4.17.1",
-    "jest": "^27.4.3",
-    "nodemon": "^2.0.15"
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
   },
   "dependencies": {
     "dotenv": "^10.0.0",

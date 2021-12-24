@@ -7,7 +7,7 @@ const reviewSchema = new Schema({
   id: { type: Number, index: true },
   product_id: { type: Number, index: true },
   rating: Number,
-  date: String,
+  date: Number,
   summary: String,
   body: String,
   recommend: Boolean,

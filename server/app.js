@@ -1,25 +1,15 @@
-var express = require('express')
-const mongoose = require('mongoose')
-const { Review } = require('../database/index.js')
-const getMeta = require('../database/queries/getMeta.js')
-const getReviews = require('../database/queries/getReviews.js')
-const postReview = require('../database/queries/postReview.js')
-const markHelpful = require('../database/queries/markHelpful.js')
-const reportReview = require('../database/queries/reportReview.js')
+const express = require('express')
+require('../database/config')
+const getMeta = require('../database/queries/getMeta')
+const getReviews = require('../database/queries/getReviews')
+const postReview = require('../database/queries/postReview')
+const markHelpful = require('../database/queries/markHelpful')
+const reportReview = require('../database/queries/reportReview')
+
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-
-const DB = process.env.DATABASE_LOCAL
-
-mongoose.connect(DB)
-  .then(() => {
-    console.log('CONNECTION OPEN')
-  })
-  .catch(err => {
-    console.log('CONNECTION ERRORS!', err)
-  })
 
 
 app.get('/reviews', async (req, res) => {
@@ -58,9 +48,13 @@ app.post('/reviews', async (req, res) => {
     res.sendStatus(500);
   }
 })
-//
+
+
+//Test PUT request in postman
+// app.put('/reviews/:review_id', async (req, res) => {
+
 app.put('/reviews/:review_id/helpful', async (req, res) => {
-  // app.put('/reviews/:review_id', async (req, res) => {
+
   try {
     const { review_id } = req.params
     // console.log('Review_id:', review_id)
@@ -72,9 +66,9 @@ app.put('/reviews/:review_id/helpful', async (req, res) => {
   }
 
 })
-//
+
 app.put('/reviews/:review_id/report', async (req, res) => {
-  // app.put('/reviews/:review_id', async (req, res) => {
+
   try {
     const { review_id } = req.params
     await reportReview(review_id)
@@ -85,9 +79,6 @@ app.put('/reviews/:review_id/report', async (req, res) => {
   }
 
 })
-
-
-
 
 
 

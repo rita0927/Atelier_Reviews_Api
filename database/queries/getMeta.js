@@ -1,4 +1,4 @@
-const { Review, Characteristic } = require('../index');
+const { Review, Characteristic } = require('../schema');
 
 const getMeta = async (productId) => {
 

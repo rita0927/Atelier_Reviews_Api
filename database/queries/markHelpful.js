@@ -1,4 +1,4 @@
-const { Review } = require('../index');
+const { Review } = require('../schema');
 
 const markHelpful = async (review_id) => {
 

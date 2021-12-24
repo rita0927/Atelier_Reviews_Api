@@ -1,4 +1,4 @@
-const { Review, CharacteristicReview, ReviewPhoto } = require('../index');
+const { Review, CharacteristicReview, ReviewPhoto } = require('../schema');
 
 
 const postReview = (newReview) => {

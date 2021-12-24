@@ -1,4 +1,4 @@
-const { Review } = require('../index');
+const { Review } = require('../schema');
 
 const getReviews = async (page = 1, count = 5, productId) => {
 
