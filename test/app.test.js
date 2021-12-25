@@ -2,9 +2,6 @@ const request = require('supertest')
 const _globals = require('@jest/globals')
 const mongoose = require('mongoose')
 
-// require('dotenv').config()
-// const DB = process.env.DATABASE_MOCK
-// mongoose.connect(DB)
 
 const app = require('../server/app')
 const getReviews = require('../database/queries/getReviews')
@@ -55,8 +52,6 @@ const mockData = {
 
 
 
-
-
 describe('GET reviews', () => {
 
 
@@ -75,8 +70,10 @@ describe('GET reviews', () => {
     expect(getReviews).toHaveBeenCalledTimes(1)
     expect(response.status).toBe(200)
     expect(response.body.data[0].product_id).toBe(1)
+
   })
 
+  //mock and catch an error
   it('should respond with a 500 status code', async () => {
     getReviews.mockImplementation(() => {
       throw new Error('Fail to get reviews');
@@ -110,6 +107,7 @@ describe('GET meta', () => {
     expect(response.body.data[0].rating).toBe(1)
   })
 
+  //mock and catch an error
   it('should respond with a 500 status code', async () => {
     getMeta.mockImplementation(() => {
       throw new Error('Fail to get meta');
@@ -141,6 +139,7 @@ describe('POST reviews', () => {
 
   })
 
+  //mock and catch an error
   it('should respond with a 500 status code', async () => {
     postReview.mockImplementation(() => {
       throw new Error('Fail to post a review');
@@ -169,6 +168,7 @@ describe('PUT reviews', () => {
 
   })
 
+  //mock and catch an error
   it('should respond with a 500 status code', async () => {
     markHelpful.mockImplementation(() => {
       throw new Error('Fail to update helpfulness');
@@ -193,6 +193,7 @@ describe('PUT reviews', () => {
 
   })
 
+  //mock and catch an error
   it('should respond with a 500 status code', async () => {
     reportReview.mockImplementation(() => {
       throw new Error('Fail to report review');

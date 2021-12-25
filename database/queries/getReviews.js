@@ -58,7 +58,8 @@ const getReviews = async (page = 1, count = 5, productId) => {
       })
 
   } catch (err) {
-    console.log(err)
+    console.log('Get reviews error')
+
   }
 
   return reviews
