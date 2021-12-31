@@ -15,7 +15,7 @@ const getReviews = async (page = 1, count = 5, productId) => {
 
     await Review.aggregate([
       {
-        $match: { product_id: Number(productId) }
+        $match: { product_id: parseInt(productId) }
       },
       {
         $lookup: {
@@ -44,7 +44,7 @@ const getReviews = async (page = 1, count = 5, productId) => {
               "review_id": review.id,
               "rating": review.rating,
               "summary": review.summary,
-              "recommend": Boolean(review.recommend),
+              "recommend": review.recommend === 'true',
               "response": review.response,
               "body": review.body,
               "date": new Date(parseInt(review.date)).toISOString(),

@@ -6,35 +6,36 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
   id: { type: Number, index: true },
   product_id: { type: Number, index: true },
-  rating: Number,
-  date: Number,
-  summary: String,
-  body: String,
+  rating: { type: Number, index: true },
+  date: { type: Number, index: true },
+  summary: { type: String, index: true },
+  body: { type: String, index: true },
   recommend: Boolean,
   reported: Boolean,
-  reviewer_name: String,
-  reviewer_email: String,
-  response: String,
-  helpfulness: Number
+  reviewer_name: { type: String, index: true },
+  reviewer_email: { type: String, index: true },
+  response: { type: String, index: true },
+  helpfulness: { type: Number, index: true }
 });
 
 const characteristicSchema = new Schema({
   id: { type: Number, index: true },
   product_id: { type: Number, index: true },
-  name: String
+  name: { type: String, index: true }
 });
 
 const characteristicReviewsSchema = new Schema({
   id: { type: Number, index: true },
   characteristic_id: { type: Number, index: true },
   review_id: { type: Number, index: true },
-  value: Number
+  value: { type: Number, index: true }
+
 });
 
 const reviewPhotoSchema = new Schema({
-  id: Number,
+  id: { type: Number, index: true },
   review_id: { type: Number, index: true },
-  url: String
+  url: { type: String, index: true }
 });
 
 

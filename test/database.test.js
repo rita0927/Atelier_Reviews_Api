@@ -87,7 +87,7 @@ describe('GET meta', () => {
     expect(actual1).toEqual(expected1)
 
     const expected2 = 4
-    const actual2 = Object.keys(meta.characteritics).length
+    const actual2 = Object.keys(meta.characteristics).length
     expect(actual2).toEqual(expected2)
 
 

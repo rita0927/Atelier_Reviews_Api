@@ -11,7 +11,7 @@ const postReview = async (newReview) => {
 
     const [reviewCount, photoCount, characteristicCount] = await Promise.all([Review.count(), ReviewPhoto.count(), CharacteristicReview.count()]);
 
-    console.log('COUNT:', reviewCount, photoCount, characteristicCount)
+    // console.log('COUNT:', reviewCount, photoCount, characteristicCount)
 
     await Review.create({
       id: reviewCount + 1,
@@ -54,8 +54,8 @@ const postReview = async (newReview) => {
   } catch (err) {
     console.log(err)
   }
-
   return newReview
+
 }
 
 

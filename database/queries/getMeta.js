@@ -5,23 +5,23 @@ const getMeta = async (productId) => {
   const meta = {
     product_id: productId,
     ratings: {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0
+      1: '0',
+      2: '0',
+      3: '0',
+      4: '0',
+      5: '0'
     },
     recommended: {
       false: 0,
       true: 0
     },
-    characteritics: {}
+    characteristics: {}
   }
 
   try {
-    await Review.aggregate([
+    const ratingRes = await Review.aggregate([
       {
-        $match: { product_id: Number(productId) }
+        $match: { product_id: parseInt(productId) }
       },
       {
         $group: {
@@ -32,18 +32,18 @@ const getMeta = async (productId) => {
       {
         $sort: { '_id': 1 }
       }
-    ]).exec()
-      .then(res => {
-        res.forEach(rating => {
-          meta.ratings[rating._id] = rating.count || 0
-        })
-        // console.log('ratings:', meta.ratings)
-      })
+    ])
+
+    ratingRes.forEach(rating => {
+      meta.ratings[rating._id] = rating.count.toString() || '0'
+    })
+
+    // console.log('ratings:', meta.ratings)
 
 
-    await Review.aggregate([
+    const recommendRes = await Review.aggregate([
       {
-        $match: { product_id: Number(productId) }
+        $match: { product_id: parseInt(productId) }
       },
       {
         $group: {
@@ -54,18 +54,16 @@ const getMeta = async (productId) => {
       {
         $sort: { '_id': 1 }
       }
-    ]).exec()
-      .then(res => {
-        meta.recommended.false = res[0] ? res[0].count : 0
-        meta.recommended.true = res[1] ? res[1].count : 0
-        // console.log('recommended:', meta.recommended)
-      })
+    ])
+
+    meta.recommended.false = recommendRes[0] ? recommendRes[0].count.toString() : '0'
+    meta.recommended.true = recommendRes[1] ? recommendRes[1].count.toString() : '0'
+    // console.log('recommended:', meta.recommended)
 
 
-
-    await Characteristic.aggregate([
+    const characteristicRes = await Characteristic.aggregate([
       {
-        $match: { product_id: Number(productId) }
+        $match: { product_id: parseInt(productId) }
       },
       {
         $lookup: {
@@ -84,22 +82,21 @@ const getMeta = async (productId) => {
           'characteristics': '$characteristics.value'
         }
       }
-    ]).exec()
-      .then(res => {
-        res.forEach(char => {
-          const charValue = char.characteristics.reduce((sum, cur) => {
-            return sum + cur
-          }, 0) / char.characteristics.length || 0
-          meta.characteritics[char.name] = {
-            'id': char.id,
-            // 'value': char.characteristics.reduce((sum, cur) => {
-            //   return sum + cur
-            // }, 0) / char.characteristics.length || 0
-            value: charValue.toString()
-          }
-        })
-        // console.log('characteristics:', meta)
-      })
+    ])
+
+    // console.log('characteristicRes', characteristicRes)
+
+    characteristicRes.forEach(char => {
+      const charValue = (char.characteristics.reduce((sum, cur) => {
+        return sum + cur
+      }, 0) / char.characteristics.length) || '0'
+
+      meta.characteristics[char.name] = {
+        id: char.id,
+        value: charValue.toString()
+      }
+    })
+    // console.log('characteristics:', meta)
 
   } catch (err) {
     console.log(err)
@@ -112,3 +109,17 @@ const getMeta = async (productId) => {
 }
 
 module.exports = getMeta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
