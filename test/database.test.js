@@ -82,7 +82,7 @@ describe('GET meta', () => {
     const meta = await getMeta(1, 5, productID)
     // console.log(meta)
 
-    const expected1 = 1
+    const expected1 = '1'
     const actual1 = meta.recommended.false
     expect(actual1).toEqual(expected1)
 
