@@ -50,8 +50,6 @@ app.post('/reviews', async (req, res) => {
 })
 
 
-//Test PUT request in postman
-// app.put('/reviews/:review_id', async (req, res) => {
 
 app.put('/reviews/:review_id/helpful', async (req, res) => {
 

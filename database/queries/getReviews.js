@@ -44,7 +44,7 @@ const getReviews = async (page = 1, count = 5, productId) => {
               "review_id": review.id,
               "rating": review.rating,
               "summary": review.summary,
-              "recommend": review.recommend === 'true',
+              "recommend": review.recommend.toString() === 'true',
               "response": review.response,
               "body": review.body,
               "date": new Date(parseInt(review.date)).toISOString(),
