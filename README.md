@@ -4,8 +4,8 @@ Phase 1: Create the Database
 DBMS Design and Creation
  Select MongoDB, NoSQL DBMS as the primary DBMS
  Define and initialize the model within DBMS
- Perform an ETL Process to transfer the full application data set into DBMS 
- 
+ Perform an ETL Process to transfer the full application data set into DBMS
+
 Phase 2: Create the API
 Create the service
  Initialize the API server
@@ -33,5 +33,5 @@ DBMS and API Server Deployment
  Stress-test the service in production
  Stress test the deployed service on EC2
  Test the full application
- 
+
 

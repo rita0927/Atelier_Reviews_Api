@@ -1,10 +1,10 @@
 const express = require('express')
 require('../database/config')
-const getMeta = require('../database/queries/getMeta')
-const getReviews = require('../database/queries/getReviews')
-const postReview = require('../database/queries/postReview')
-const markHelpful = require('../database/queries/markHelpful')
-const reportReview = require('../database/queries/reportReview')
+const getMeta = require('../database/controller/getMeta')
+const getReviews = require('../database/controller/getReviews')
+const postReview = require('../database/controller/postReview')
+const markHelpful = require('../database/controller/markHelpful')
+const reportReview = require('../database/controller/reportReview')
 
 
 const app = express()
