@@ -11,8 +11,8 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: .
-    ports:
-      - 4000:3000
+    # ports:
+    #   - 4000:3000
     volumes:
       - .:/usr/src/app
     environment:
@@ -21,6 +21,23 @@ services:
     depends_on:
       - mongo
 
+  dbseed:
+      build:
+        dockerfile: Dockerfile.dev
+        context: ./data
+      links:
+        - mongo
+
+  nginx:
+    depends_on:
+      - api
+      - mongo
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
 volumes:
   mongo: {}
 

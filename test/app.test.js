@@ -4,11 +4,11 @@ const mongoose = require('mongoose')
 
 
 const app = require('../server/app')
-const getReviews = require('../database/queries/getReviews')
-const getMeta = require('../database/queries/getMeta.js')
-const postReview = require('../database/queries/postReview.js')
-const markHelpful = require('../database/queries/markHelpful.js')
-const reportReview = require('../database/queries/reportReview.js')
+const getReviews = require('../database/controller/getReviews')
+const getMeta = require('../database/controller/getMeta.js')
+const postReview = require('../database/controller/postReview.js')
+const markHelpful = require('../database/controller/markHelpful.js')
+const reportReview = require('../database/controller/reportReview.js')
 
 
 afterAll(async () => {
@@ -22,11 +22,11 @@ afterEach(() => {
 
 
 
-jest.mock('../database/queries/getReviews', () => jest.fn())
-jest.mock('../database/queries/getMeta.js', () => jest.fn())
-jest.mock('../database/queries/postReview', () => jest.fn())
-jest.mock('../database/queries/markHelpful', () => jest.fn())
-jest.mock('../database/queries/reportReview', () => jest.fn())
+jest.mock('../database/controller/getReviews', () => jest.fn())
+jest.mock('../database/controller/getMeta.js', () => jest.fn())
+jest.mock('../database/controller/postReview', () => jest.fn())
+jest.mock('../database/controller/markHelpful', () => jest.fn())
+jest.mock('../database/controller/reportReview', () => jest.fn())
 
 
 

@@ -11,12 +11,14 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+//Override the console.log function to an empty function for performance testing
+console.log = function () { };
 
 app.get('/reviews', async (req, res) => {
   const { page, count, product_id } = req.query
   try {
     const reviews = await getReviews(page, count, product_id)
-    // console.log('Review:', reviews)
+    // console.log('Review in app:', reviews)
     res.status(200).send(reviews);
   } catch (err) {
     console.error(err);

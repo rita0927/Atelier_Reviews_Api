@@ -1,5 +1,11 @@
 const { Review } = require('../schema');
 
+
+//console.log will reduce program's performance since it takes computational time
+//console.log is a lot slower than an empty function. Override the console.log function to an empty function
+console.log = function () { };
+
+
 const getReviews = async (page = 1, count = 5, productId) => {
 
   // console.log(productId)
@@ -14,8 +20,23 @@ const getReviews = async (page = 1, count = 5, productId) => {
   try {
 
     await Review.aggregate([
+      // {
+      //   $match: {
+      //     product_id: parseInt(productId)
+      //   }
+      // },
       {
-        $match: { product_id: parseInt(productId) }
+        $match: {
+          $and: [{ product_id: parseInt(productId) }, { reported: 'false' }]
+        }
+      },
+      {
+        $sort: {
+          helpfulness: -1
+        }
+      },
+      {
+        $limit: parseInt(count)
       },
       {
         $lookup: {
@@ -30,12 +51,9 @@ const getReviews = async (page = 1, count = 5, productId) => {
           'photos._id': 0,
           'photos.review_id': 0
         }
-      },
-      {
-        $sort: { helpfulness: -1 }
       }
     ])
-      .exec()
+      // .exec()
       .then(res => {
         res.forEach(review => {
           // console.log('Review:', res)
@@ -44,7 +62,7 @@ const getReviews = async (page = 1, count = 5, productId) => {
               "review_id": review.id,
               "rating": review.rating,
               "summary": review.summary,
-              "recommend": review.recommend.toString() === 'true',
+              "recommend": review.recommend === 'true',
               "response": review.response,
               "body": review.body,
               "date": new Date(parseInt(review.date)).toISOString(),
@@ -61,7 +79,7 @@ const getReviews = async (page = 1, count = 5, productId) => {
     console.log('Get reviews error')
 
   }
-
+  // console.log('GetReview:', reviews)
   return reviews
 
 }

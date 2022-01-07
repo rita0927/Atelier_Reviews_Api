@@ -39,3 +39,4 @@ dist/
 apiToken.js
 coverage/
 .env
+csv

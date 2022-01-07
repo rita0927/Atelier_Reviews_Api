@@ -23,9 +23,9 @@ export const options = {
         { duration: '3m', target: 100 },
         { duration: '1m', target: 200 }, // normal load
         { duration: '3m', target: 200 },
-        { duration: '1m', target: 300 }, // around the breaking point
+        { duration: '1m', target: 300 }, // increase load
         { duration: '3m', target: 400 },
-        { duration: '1m', target: 500 }, // beyond the breaking point
+        { duration: '1m', target: 500 }, // around the breaking point
         { duration: '3m', target: 400 },
         { duration: '4m', target: 0 }, // scale down. Recovery stage.
       ],
@@ -46,9 +46,9 @@ export const options = {
         { duration: '3m', target: 100 },
         { duration: '1m', target: 200 }, // normal load
         { duration: '3m', target: 200 },
-        { duration: '1m', target: 300 }, // around the breaking point
+        { duration: '1m', target: 300 }, // increase load
         { duration: '3m', target: 400 },
-        { duration: '1m', target: 500 }, // beyond the breaking point
+        { duration: '1m', target: 500 }, // around the breaking point
         { duration: '3m', target: 400 },
         { duration: '4m', target: 0 }, // scale down. Recovery stage.
       ],
@@ -65,7 +65,7 @@ export const options = {
 
 
 export function getReview() {
-  let productId = Math.floor(Math.random() * 1000000)
+  let productId = Math.floor(Math.random() * 100000 + 900000)
 
   let res = http.get(`http://localhost:3000/reviews?product_id=${productId}`);
   check(res, {
@@ -76,7 +76,7 @@ export function getReview() {
 
 
 export function getMeta() {
-  let productId = Math.floor(Math.random() * 1000000)
+  let productId = Math.floor(Math.random() * 100000 + 900000)
 
   let res = http.get(`http://localhost:3000/reviews/meta?product_id=${productId}`);
   check(res, {

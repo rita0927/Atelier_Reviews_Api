@@ -1,5 +1,9 @@
 const { Review, Characteristic } = require('../schema');
 
+//Override the console.log function to an empty function for performance testing
+console.log = function () { };
+
+
 const getMeta = async (productId) => {
 
   const meta = {
@@ -24,13 +28,13 @@ const getMeta = async (productId) => {
         $match: { product_id: parseInt(productId) }
       },
       {
+        $sort: { '_id': 1 }
+      },
+      {
         $group: {
           '_id': '$rating',
           'count': { $sum: 1 }
         }
-      },
-      {
-        $sort: { '_id': 1 }
       }
     ])
 
@@ -46,13 +50,13 @@ const getMeta = async (productId) => {
         $match: { product_id: parseInt(productId) }
       },
       {
+        $sort: { '_id': 1 }
+      },
+      {
         $group: {
           '_id': '$recommend',
           'count': { $sum: 1 }
         }
-      },
-      {
-        $sort: { '_id': 1 }
       }
     ])
 
