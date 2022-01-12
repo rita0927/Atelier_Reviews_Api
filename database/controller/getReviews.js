@@ -3,7 +3,7 @@ const { Review } = require('../schema');
 
 //console.log will reduce program's performance since it takes computational time
 //console.log is a lot slower than an empty function. Override the console.log function to an empty function
-console.log = function () { };
+// console.log = function () { };
 
 
 const getReviews = async (page = 1, count = 5, productId) => {

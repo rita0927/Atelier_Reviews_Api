@@ -1,7 +1,7 @@
 const { Review, Characteristic } = require('../schema');
 
 //Override the console.log function to an empty function for performance testing
-console.log = function () { };
+// console.log = function () { };
 
 
 const getMeta = async (productId) => {
