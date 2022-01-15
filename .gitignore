@@ -6,3 +6,5 @@ coverage/
 csv
 
 package-lock.json
+
+dump

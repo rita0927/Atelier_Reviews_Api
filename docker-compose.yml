@@ -16,21 +16,87 @@ services:
       - 6379:6379
 
 
-  api:
+  api1:
     build:
       dockerfile: Dockerfile.dev
       context: .
-    ports:
-      - 4000:3000
+    # ports:
+    #   - 4000:3000
     volumes:
       - .:/usr/src/app
     environment:
       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
-      # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]
+      # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
       PORT: 3000
     depends_on:
       - mongo
       - redis
+
+  api2:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
+      # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
+      PORT: 3001
+    depends_on:
+      - mongo
+
+  api3:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
+      # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
+      PORT: 3002
+    depends_on:
+      - mongo
+
+  api4:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    # ports:
+    #   - 4000:3000
+    volumes:
+      - .:/usr/src/app
+    environment:
+      DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
+      # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
+      PORT: 3003
+    depends_on:
+      - mongo
+
+
+
+
+
+  nginx:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+  # image: nginx
+    volumes:
+      - './nginx/default.conf:/etc/nginx/nginx.conf'
+    restart: always
+
+    # #local port, replace to 80 for deployment
+    ports:
+      - '3050:80'
+    depends_on:
+      - api1
+      - api2
+      - api3
+      - api4
+      - mongo
+
+
 
   # dbseed:
   #     build:
@@ -39,20 +105,84 @@ services:
   #     links:
   #       - mongo
 
-  nginx:
-    depends_on:
-      - api
-      - mongo
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    #local port, replace to 80 for deployment
-    ports:
-      - '3050:80'
-
 volumes:
   mongo: {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# version: '3.3'
+# services:
+#   mongo:
+#     image: mongo:latest
+#     restart: always
+#     ports:
+#       - 2717:27017
+#     volumes:
+#       - mongo:/data/db
+
+#   redis:
+#     image: redis:alpine
+#     volumes:
+#       - ./data:/data
+#     ports:
+#       - 6379:6379
+
+
+#   api:
+#     build:
+#       dockerfile: Dockerfile.dev
+#       context: .
+#     ports:
+#       - 4000:3000
+#     volumes:
+#       - .:/usr/src/app
+#     environment:
+#       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
+#       # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]
+#       PORT: 3000
+#     depends_on:
+#       - mongo
+#       - redis
+
+#   # dbseed:
+#   #     build:
+#   #       dockerfile: Dockerfile.dev
+#   #       context: ./data
+#   #     links:
+#   #       - mongo
+
+#   nginx:
+#     depends_on:
+#       - api
+#       - mongo
+#     restart: always
+#     build:
+#       dockerfile: Dockerfile.dev
+#       context: ./nginx
+#     #local port, replace to 80 for deployment
+#     ports:
+#       - '3050:80'
+
+# volumes:
+#   mongo: {}
 
 
 
