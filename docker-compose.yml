@@ -62,13 +62,12 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: .
-    # ports:
-    #   - 4000:3000
     volumes:
       - .:/usr/src/app
     environment:
       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
       # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
+      # DATABASE_PROD: mongodb://user:password@3.92.216.220:27017/Atelier_reviews?authSource=Atelier_reviews
       PORT: 3003
     depends_on:
       - mongo

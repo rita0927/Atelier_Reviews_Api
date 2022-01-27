@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 require('dotenv').config('../.env')
 
-const DB = process.env.DATABASE_LOCAL
-// const DB = process.env.DATABASE_PROD
+// const DB = process.env.DATABASE_LOCAL
+const DB = process.env.DATABASE_PROD
 
 
 

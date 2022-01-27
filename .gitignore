@@ -6,5 +6,6 @@ coverage/
 csv
 
 package-lock.json
-
-dump
+.DS_Store
+dump.rdb
+data

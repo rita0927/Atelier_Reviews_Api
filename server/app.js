@@ -9,7 +9,7 @@ const markHelpful = require('../database/controller/markHelpful')
 const reportReview = require('../database/controller/reportReview')
 
 
-// Redis connection for deployment
+// // Redis connection for deployment
 // const client = redis.createClient(
 //   { url: 'redis://redis:6379' }
 // );
