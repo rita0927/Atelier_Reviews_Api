@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 services:
   mongo:
     image: mongo:latest
@@ -15,7 +15,6 @@ services:
     ports:
       - 6379:6379
 
-
   api1:
     build:
       dockerfile: Dockerfile.dev
@@ -27,7 +26,6 @@ services:
     environment:
       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
       # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
-      # DATABASE_PROD: mongodb://user:password@3.92.216.220:27017/Atelier_reviews?authSource=Atelier_reviews
       PORT: 3000
     depends_on:
       - mongo
@@ -42,7 +40,6 @@ services:
     environment:
       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
       # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
-      # DATABASE_PROD: mongodb://user:password@3.92.216.220:27017/Atelier_reviews?authSource=Atelier_reviews
       PORT: 3001
     depends_on:
       - mongo
@@ -56,7 +53,6 @@ services:
     environment:
       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
       # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
-      # DATABASE_PROD: mongodb://user:password@3.92.216.220:27017/Atelier_reviews?authSource=Atelier_reviews
       PORT: 3002
     depends_on:
       - mongo
@@ -70,35 +66,28 @@ services:
     environment:
       DATABASE_LOCAL: mongodb://mongo:27017/Atelier_reviews
       # DATABASE_PROD: mongodb://[USERNAME]:[PASSWORD]@[API]/[DATABASE]？authSource=[DATABASE]
-      # DATABASE_PROD: mongodb://user:password@3.92.216.220:27017/Atelier_reviews?authSource=Atelier_reviews
       PORT: 3003
     depends_on:
       - mongo
-
-
-
-
 
   nginx:
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
-  # image: nginx
+    # image: nginx
     volumes:
-      - './nginx/default.conf:/etc/nginx/nginx.conf'
+      - "./nginx/default.conf:/etc/nginx/nginx.conf"
     restart: always
 
     # #local port, replace to 80 for deployment
     ports:
-      - '3050:80'
+      - "3050:80"
     depends_on:
       - api1
       - api2
       - api3
       - api4
       - mongo
-
-
 
   # dbseed:
   #     build:
@@ -109,27 +98,6 @@ services:
 
 volumes:
   mongo: {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # version: '3.3'
 # services:
 #   mongo:
@@ -146,7 +114,6 @@ volumes:
 #       - ./data:/data
 #     ports:
 #       - 6379:6379
-
 
 #   api:
 #     build:
@@ -185,7 +152,4 @@ volumes:
 
 # volumes:
 #   mongo: {}
-
-
-
 
